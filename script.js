@@ -1,26 +1,19 @@
-const btnScrollTo = document.querySelector(".btn--scroll-to");
-const section1 = document.querySelector("#section--1");
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
 
-btnScrollTo.addEventListener("click", function (e) {
-  const s1coords = section1.getBoundingClientRect();
-  console.log(s1coords);
+document.querySelector(".nav__link").addEventListener("click", function (e) {
+  // 1
+  this.style.backgroundColor = randomColor(); // 2
+  console.log("LINK", e.target, e.currentTarget); // 3
+  console.log(e.currentTarget === this); // 4
+  // Stop propagation
+  e.stopPropagation();
+});
 
-  //top is from start of the viewport(url bar line) to the top of the element
-
-  // console.log(e.target.getBoundingClientRect());
-
-  console.log("Current scroll (X/Y)", window.scrollX, window.scrollY);
-
-  console.log(
-    document.documentElement.clientHeight,
-    document.documentElement.clientWidth
-  );
-
-  window.scrollTo({
-    left: s1coords.left + window.scrollX,
-    top: s1coords.top + window.scrollY,
-    behavior: "smooth",
-  });
-
-  // section1.scrollIntoView({ behavior: "smooth" });
+document.querySelector(".nav__links").addEventListener("click", function (e) {
+  // 5
+  this.style.backgroundColor = randomColor(); // 6
+  console.log("CONTAINER", e.target, e.currentTarget); // 7
 });
