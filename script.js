@@ -1,19 +1,23 @@
-const randomInt = (min, max) =>
-  Math.floor(Math.random() * (max - min + 1) + min);
-const randomColor = () =>
-  `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
+const h1 = document.querySelector("h1");
 
-document.querySelector(".nav__link").addEventListener("click", function (e) {
-  // 1
-  this.style.backgroundColor = randomColor(); // 2
-  console.log("LINK", e.target, e.currentTarget); // 3
-  console.log(e.currentTarget === this); // 4
-  // Stop propagation
-  e.stopPropagation();
-});
+console.log(h1.querySelectorAll(".highlight"));
 
-document.querySelector(".nav__links").addEventListener("click", function (e) {
-  // 5
-  this.style.backgroundColor = randomColor(); // 6
-  console.log("CONTAINER", e.target, e.currentTarget); // 7
-});
+//returns node list of h1
+console.log(h1.childNodes);
+
+//returns html collection of html children
+console.log(h1.children);
+
+h1.firstElementChild.style.color = "white";
+h1.lastElementChild.style.color = "orangered";
+
+console.log(h1.parentNode);
+console.log(h1.parentElement);
+
+//closest parent/ element no matter where in the dom tree
+h1.closest(".header").style.background = "var(--gradient-secondary)";
+
+console.log(h1.previousElementSibling);
+console.log(h1.nextSibling);
+
+console.log(h1.parentElement.children);
