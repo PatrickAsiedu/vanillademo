@@ -1,45 +1,26 @@
-// console.log(document.documentElement)
-// console.log(document.head);
-document.getElementById("section--1");
-const header = document.querySelector(".header");
-const allButtons = document.getElementsByTagName("button");
-// console.log(allButtons)
-// console.log(document.getElementsByClassName("btn"));
+const btnScrollTo = document.querySelector(".btn--scroll-to");
+const section1 = document.querySelector("#section--1");
 
-// Creating and inserting elements
-const message = document.createElement("div");
-message.classList.add("cookie-message");
-message.textContent =
-  "We use cookies for improved functionality and analytics.";
-message.innerHTML =
-  "We use cookies for improved functionality and analytics. <button class='btn btn--close-cookie'>Got it!</button>";
+btnScrollTo.addEventListener("click", function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
 
-header.append(message);
-// header.append(message.cloneNode(true))
+  //top is from start of the viewport(url bar line) to the top of the element
 
-document
-  .querySelector(".btn--close-cookie")
-  .addEventListener("click", function () {
-    message.remove();
+  // console.log(e.target.getBoundingClientRect());
+
+  console.log("Current scroll (X/Y)", window.scrollX, window.scrollY);
+
+  console.log(
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+
+  window.scrollTo({
+    left: s1coords.left + window.scrollX,
+    top: s1coords.top + window.scrollY,
+    behavior: "smooth",
   });
 
-message.style.backgroundColor = "#37383d";
-
-console.log(getComputedStyle(message).backgroundColor);
-
-message.style.height =
-  Number.parseFloat(getComputedStyle(message).height, 10) + 30 + "px";
-
-document.documentElement.style.setProperty("--color-primary", "blue");
-
-const logo = document.querySelector(".nav__logo");
-console.log(logo.alt);
-
-//absolute url - http://
-console.log(logo.src);
-
-///relative url
-console.log(logo.getAttribute("src"));
-
-//used to store data in hmtl code
-console.log(logo.dataset.versionNumber);
+  // section1.scrollIntoView({ behavior: "smooth" });
+});
