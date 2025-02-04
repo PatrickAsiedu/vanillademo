@@ -1,23 +1,31 @@
-const h1 = document.querySelector("h1");
+const tabs = document.querySelectorAll('.operation__tab');
 
-console.log(h1.querySelectorAll(".highlight"));
+const tabsContent = document.querySelectorAll('.operations__content');
 
-//returns node list of h1
-console.log(h1.childNodes);
+const tabsContainer = document.querySelector('.operations__tab-container');
 
-//returns html collection of html children
-console.log(h1.children);
+tabsContainer.addEventListener('click', function (e) {
 
-h1.firstElementChild.style.color = "white";
-h1.lastElementChild.style.color = "orangered";
+    // do your matching strategy to select the correct tab /element
 
-console.log(h1.parentNode);
-console.log(h1.parentElement);
 
-//closest parent/ element no matter where in the dom tree
-h1.closest(".header").style.background = "var(--gradient-secondary)";
+    const clicked = e.target.closest(".operations__tab");
+    console.log(clicked);
 
-console.log(h1.previousElementSibling);
-console.log(h1.nextSibling);
+    if (!clicked) return;
 
-console.log(h1.parentElement.children);
+
+
+    tabs.forEach(t => t.classList.remove('operations__tab--active'));
+    tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+
+    clicked.classList.add('operations__tab--active');
+
+    console.log(clicked.dataset.tab); 
+
+    //this from addded data-tab attribute
+    document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
+
+    
+
+}) 
