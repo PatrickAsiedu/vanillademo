@@ -1,3 +1,4 @@
+//implemtenting tabs
 const tabs = document.querySelectorAll(".operation__tab");
 
 const tabsContent = document.querySelectorAll(".operations__content");
@@ -25,24 +26,41 @@ tabsContainer.addEventListener("click", function (e) {
     .classList.add("operations__content--active");
 });
 
+//implementing hover effect
+
 const nav = document.querySelector(".nav");
 
 const hoverHandler = function (e) {
-if(e.target.classList.contains("nav__link")){
-    const active = e.target
+  if (e.target.classList.contains("nav__link")) {
+    const active = e.target;
 
-    const sisblings = active.closest(".nav").querySelectorAll(".nav__link")
-    console.log(sisblings)
+    const sisblings = active.closest(".nav").querySelectorAll(".nav__link");
+    console.log(sisblings);
 
-    sisblings.forEach(el => {
-        if(el !== active) el.style.opacity = this
-    })
-}
+    sisblings.forEach((el) => {
+      if (el !== active) el.style.opacity = this;
+    });
+  }
 };
-
 
 //look into bind later
 //creates a copy of function its called on and sets this keyword in funct to param
 nav.addEventListener("mouseover", hoverHandler.bind(0.5));
 
-nav.addEventListener("mouseout", hoverHandler.bind(1))
+nav.addEventListener("mouseout", hoverHandler.bind(1));
+
+//sticky navigaition
+
+
+//bad approach 
+const section1 = document.querySelector("#section--1");
+
+window.addEventListener("scroll", function () {
+  console.log(this.window.scrollY);
+
+  if (this.window.scrollY > section1.getBoundingClientRect().top) {
+    nav.classList.add("sticky");
+  } else {
+    nav.classList.remove("sticky"); 
+  }
+});
