@@ -51,16 +51,48 @@ nav.addEventListener("mouseout", hoverHandler.bind(1));
 
 //sticky navigaition
 
+//bad approach
+// const section1 = document.querySelector("#section--1");
 
-//bad approach 
-const section1 = document.querySelector("#section--1");
+// window.addEventListener("scroll", function () {
+//   // console.log(this.window.scrollY);
 
-window.addEventListener("scroll", function () {
-  console.log(this.window.scrollY);
+//   if (this.window.scrollY > section1.getBoundingClientRect().top) {
+//     nav.classList.add("sticky");
+//   } else {
+//     nav.classList.remove("sticky");
+//   }
+// });
 
-  if (this.window.scrollY > section1.getBoundingClientRect().top) {
-    nav.classList.add("sticky");
-  } else {
-    nav.classList.remove("sticky"); 
-  }
-});
+//using observer api
+
+const header = document.querySelector(".header");
+const navHeight = nav.getBoundingClientRect().height;
+const callback = function (entries, observer) {
+  //entries will all instances of the intersection
+  // entries.forEach(entry=>{
+  //   console.log(entry);
+  // })
+
+  const [entry] = entries;
+  console.log(entry);
+
+  if (!entry.isIntersecting) nav.classList.add("sticky");
+  else nav.classList.remove("sticky");
+};
+
+const Options = {
+  //element thtat wld intersect with target
+  root: null,
+
+  //percentage of intersection / % target that should be visible for callback to be called
+  threshold: 0,
+
+
+  //margin around root element
+  rootMargin: `-${navHeight}px`,
+};
+
+const headerObserver = new IntersectionObserver(callback, Options);
+
+headerObserver.observe(header);
